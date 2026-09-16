@@ -1,0 +1,7 @@
+{
+  "posicionamento": 0.55,
+  "ajuste_loja": 1.0,
+  "margem_minima": 0.5,
+  "meia_vida_dias": 180,
+  "cambio_fallback": {"USD": 5.5, "EUR": 6.0, "GBP": 7.0, "CAD": 4.0, "AUD": 3.6, "BRL": 1.0}
+}
