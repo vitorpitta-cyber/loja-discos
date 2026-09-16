@@ -1,0 +1,30 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Preços da loja</title>
+<style>
+:root{--ink:#000;--paper:#fff;--mute:#5c5c5c;--line:#d9d9d9;--tag:#1d3fbf;--tagink:#fff;--soft:#f2f2f2}
+@media(prefers-color-scheme:dark){:root{--ink:#f3f3f3;--paper:#161616;--mute:#a3a3a3;--line:#333;--tag:#8fa4ff;--tagink:#0b1230;--soft:#222}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.45 -apple-system,"Helvetica Neue",Helvetica,Arial,sans-serif}
+header{position:sticky;top:0;background:var(--paper);padding:14px 16px 10px;border-bottom:1px solid var(--line)}
+h1{font-size:18px;margin:0 0 8px;font-weight:600}h1 small{color:var(--mute);font-weight:400;font-size:13px;margin-left:8px}
+input{width:100%;font:inherit;font-size:17px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--soft);color:var(--ink)}
+input:focus{outline:2px solid var(--tag);outline-offset:1px}
+main{padding:0 16px 40px;max-width:720px;margin:0 auto}
+.n{color:var(--mute);font-size:13px;padding:10px 0 4px}
+article{border-bottom:1px solid var(--line);padding:14px 0}
+.t{font-weight:600}.a{color:var(--mute)}
+.p{display:flex;gap:8px;margin-top:10px}.p div{flex:1;border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.p b{display:block;font-size:20px;font-weight:600;color:var(--tag)}.p span{color:var(--mute);font-size:12px}.p em{font-style:normal;font-size:12px;color:var(--mute)}
+.m{margin-top:8px;font-size:13px;color:var(--mute)}
+details{margin-top:6px;font-size:13px}summary{color:var(--mute);cursor:pointer}details ul{margin:6px 0 0;padding-left:18px}
+.hide{display:none}.aviso{color:#b3261e}.vazio{text-align:center;color:var(--mute);padding:40px 0}
+</style></head><body><header><h1>Preços da loja<small>atualizado em 16/09/2026</small></h1>
+<input id="q" type="search" placeholder="Buscar artista ou disco" autocomplete="off"></header><main><div class="n" id="n"></div>
+<article data-k="Jorge Ben A Tábua de Esmeralda"><div class='t'>A Tábua de Esmeralda</div><div class='a'>Jorge Ben</div><div class='p'><div><span>VG</span><b>-</b><em>mercado -</em></div><div><span>VG+</span><b>-</b><em>mercado -</em></div><div><span>NM</span><b>-</b><em>mercado -</em></div></div><div class='m'>0 vendas eBay em 12 meses · Discogs menor R$ 24 (2 ofertas) · confiança sem dados</div></article>
+<article data-k="Tim Maia Racional Vol. 1"><div class='t'>Racional Vol. 1</div><div class='a'>Tim Maia</div><div class='p'><div><span>VG</span><b>-</b><em>mercado -</em></div><div><span>VG+</span><b>-</b><em>mercado -</em></div><div><span>NM</span><b>-</b><em>mercado -</em></div></div><div class='m'>0 vendas eBay em 12 meses · Discogs menor - (0 ofertas) · confiança sem dados</div></article><p class="vazio hide" id="vazio">Nenhum disco encontrado.</p></main>
+<script>
+const q=document.getElementById('q'),arts=[...document.querySelectorAll('article')],n=document.getElementById('n'),vz=document.getElementById('vazio');
+const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+function filtra(){const v=norm(q.value.trim());let k=0;arts.forEach(a=>{const ok=!v||norm(a.dataset.k).includes(v);a.classList.toggle('hide',!ok);if(ok)k++});
+n.textContent=k+(k===1?' disco':' discos');vz.classList.toggle('hide',k>0)}
+q.addEventListener('input',filtra);filtra();
+</script></body></html>
