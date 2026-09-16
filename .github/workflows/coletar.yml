@@ -1,0 +1,33 @@
+name: coletar precos
+
+on:
+  schedule:
+    - cron: "0 11 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  coletar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python vinil_db.py sync
+      - run: python vinil_db.py coletar
+        env:
+          DISCOGS_TOKEN: ${{ secrets.DISCOGS_TOKEN }}
+      - run: python vinil_db.py relatorio
+      - run: python vinil_db.py pagina
+      - name: salvar resultados no repositorio
+        run: |
+          git config user.name "vinil-bot"
+          git config user.email "vinil-bot@users.noreply.github.com"
+          git add vinil.db relatorio.csv RELATORIO.md docs/index.html
+          git commit -m "coleta $(date -u +%Y-%m-%d)" || echo "sem mudancas"
+          git pull --rebase
+          git push
