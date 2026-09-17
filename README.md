@@ -23,6 +23,9 @@ O GitHub executa o `vinil_db.py` toda segunda-feira, coleta vendas concluídas n
 - A próxima rodada (segunda, 8h) incorpora tudo. Para não esperar, use "Run workflow".
 - Ajustes de cálculo em `config.json`: `posicionamento` (0,55 = um pouco acima da mediana), `ajuste_loja`, `margem_minima`.
 
+## eBay pelo proxy (obrigatório no GitHub)
+O eBay bloqueia os servidores do GitHub (HTTP 403). A consulta passa por um proxy residencial: crie uma conta gratuita no ScraperAPI (scraperapi.com), copie a API key e cadastre como secret `SCRAPERAPI_KEY` no GitHub. O plano grátis dá 1.000 créditos por mês, por isso o script consulta o eBay para no máximo `max_ebay_por_rodada` discos por dia (os que estão há mais tempo sem atualização), enquanto o Discogs é atualizado para todos. Com 30 por dia, um catálogo de 200 discos é renovado a cada semana. Acompanhe o consumo no painel do ScraperAPI e ajuste o número no `config.json`. O `RELATORIO.md` traz, no final, o diagnóstico da última coleta (quantos consultados, bloqueios, vendas novas).
+
 ## Se algo falhar
 - Actions em vermelho: abra a rodada e leia a última linha. `HTTP 403` ou `503` do eBay significa bloqueio temporário do IP do GitHub; rode de novo mais tarde. Se persistir, o plano B é rodar o script no celular (a-Shell ou Pythonista).
 - Sem `DISCOGS_TOKEN` o script pula o Discogs e segue só com o eBay.
