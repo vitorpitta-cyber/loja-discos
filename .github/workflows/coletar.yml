@@ -2,7 +2,7 @@ name: coletar precos
 
 on:
   schedule:
-    - cron: "0 11 * * 1"
+    - cron: "0 11 * * *"
   workflow_dispatch:
 
 permissions:
@@ -21,6 +21,7 @@ jobs:
       - run: python vinil_db.py coletar
         env:
           DISCOGS_TOKEN: ${{ secrets.DISCOGS_TOKEN }}
+          SCRAPERAPI_KEY: ${{ secrets.SCRAPERAPI_KEY }}
       - run: python vinil_db.py relatorio
       - run: python vinil_db.py pagina
       - name: salvar resultados no repositorio
